@@ -34,35 +34,30 @@ class PhotoController {
     var persistentFileURL: URL? {
         
         let fileManager = FileManager.default
-        
-        // Grab the documents directory - MyUser/Documents/
+     
         let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
         
-        // Create a unique location for the start property list (plist) - MyUser/Documents/stars.plist
-        let photosURL = documentsDir?.appendingPathComponent("stars.plist")
+        
+        let photosURL = documentsDir?.appendingPathComponent("info.plist")
         
         return photosURL
     }
     
-    // Save the stars array to the persistentFileURL
+   
     func saveToPersistentStore() {
         do {
-            // Create the encoder
+     
             let encoder = PropertyListEncoder()
             
-            // Convert the stars into a plist
             let photosPlist = try encoder.encode(photos)
             
-            // Grab the location that we want to save the plist to
             guard let persistentFileURL = persistentFileURL else { return }
             
-            // Save the file to the documents directory
             try photosPlist.write(to: persistentFileURL)
             
         } catch let saveError {
-            // Handle the error that gets "thrown" here
-            // This catch statement will only run if throwing method fails
-            print("Error saving stars: \(saveError)")
+         
+            print("Error saving photos: \(saveError)")
         }
     }
     
@@ -70,13 +65,11 @@ class PhotoController {
         guard let persistentFileURL = persistentFileURL else { return }
         
         do {
-            // Create the decoder
+           
             let decoder = PropertyListDecoder()
             
-            // Grab the data (plist) from the persistentFileURL
             let photosPlist = try Data(contentsOf: persistentFileURL)
             
-            // Plist -> [Photo]
             let photos = try decoder.decode([Photo].self, from: photosPlist)
             
             self.photos = photos
