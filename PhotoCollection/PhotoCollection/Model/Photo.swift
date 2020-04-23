@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct Photo: Equatable, Codable {
+    var imageData: Data
+    var title: String
+}

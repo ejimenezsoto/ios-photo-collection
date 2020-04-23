@@ -10,6 +10,8 @@ import UIKit
 
 class ThemeSelectionViewController: UIViewController {
 
+    var themeHelper: ThemeHelper?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +27,18 @@ class ThemeSelectionViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
-
+     
+     }
+     */
+ 
+    @IBAction func selectDarkTheme(_ sender: Any) {             themeHelper?.setThemePreferenceToDark()
+        dismiss(animated: true, completion: nil)
+        
+    }
+    @IBAction func setThemePreferenceToBlue(_ sender: Any) {
+    
+   themeHelper?.setThemePreferenceToBlue()
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
